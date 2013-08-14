@@ -1,0 +1,20 @@
+{
+  "name": "youtube-audio-stream",
+  "description": "youtube-audio-stream",
+  "version": "0.0.0",
+  "repository": {
+    "url": "git://github.com/jameskyburz/youtube-audio-stream.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "cat ./test/video.js | node ./node_modules/indexhtmlify/index.js > ./test/server.html && node ./test/server.js"
+  },
+  "dependencies": {
+    "through": "~2.3.4",
+    "fluent-ffmpeg": "~1.5.2",
+    "ytdl": "~0.1.19"
+  },
+  "devDependencies": {
+    "indexhtmlify": "~1.0.2"
+  }
+}
