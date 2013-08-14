@@ -3,6 +3,7 @@
   "description": "youtube-audio-stream",
   "version": "0.0.0",
   "repository": {
+    "type": "git",
     "url": "git://github.com/jameskyburz/youtube-audio-stream.git"
   },
   "main": "index.js",
