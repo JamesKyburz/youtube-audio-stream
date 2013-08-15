@@ -10,6 +10,7 @@
   "scripts": {
     "test": "cat ./test/video.js | node ./node_modules/indexhtmlify/index.js > ./test/server.html && node ./test/server.js"
   },
+  "keywords": [ "audio", "youtube", "stream", "streaming" ],
   "dependencies": {
     "through": "~2.3.4",
     "fluent-ffmpeg": "~1.5.2",
