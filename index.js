@@ -1,13 +1,14 @@
-var ytdl    = require('ytdl');
-var ffmpeg  = require('fluent-ffmpeg');
-var through = require('through');
+var ytdl     = require('ytdl');
+var ffmpeg   = require('fluent-ffmpeg');
+var through  = require('through');
+var defaults = require('./defaults');
 
-module.exports = function(uri, opt) {
-  opt = opt || {};
-  opt.videoFormat = opt.videoFormat || 'mp4';
-  opt.audioFormat = opt.audioFormat || 'mp3';
+module.exports = streamify;
 
-  var video = ytdl(uri, {filter: filterVideo, quality: 'lowest'});
+function streamify(uri, opt) {
+  defaults.set(opt = opt || {});
+
+  var video = ytdl(uri, {filter: filterVideo, quality: opt.quality});
 
   function filterVideo(format) {
     return format.container === (opt.videoFormat);
