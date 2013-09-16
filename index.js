@@ -23,4 +23,4 @@ function streamify(uri, opt) {
 
   return stream;
 
-};
+}
