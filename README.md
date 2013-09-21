@@ -17,5 +17,5 @@ npm test
 With [npm](http://npmjs.org) do:
 
 ```
-npm install youtube-stream-audio
+npm install youtube-audio-stream
 ```
