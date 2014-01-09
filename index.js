@@ -6,7 +6,7 @@ var fs = require('fs');
 
 module.exports = streamify;
 
-function streamify(uri, opt, file) {
+function streamify(uri, opt) {
   defaults.set(opt = opt || {});
 
   var video = ytdl(uri, {filter: filterVideo, quality: opt.quality});
@@ -15,7 +15,7 @@ function streamify(uri, opt, file) {
     return format.container === (opt.videoFormat);
   }
 
-  if (file) {
+  if (opt.file) {
     var stream = fs.createWriteStream(file)
   } else {
     var stream = through();
