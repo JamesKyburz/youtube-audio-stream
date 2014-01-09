@@ -2,6 +2,7 @@ var ytdl     = require('ytdl');
 var ffmpeg   = require('fluent-ffmpeg');
 var through  = require('through');
 var defaults = require('./defaults');
+var fs       = require('fs');
 
 module.exports = streamify;
 
@@ -14,7 +15,10 @@ function streamify(uri, opt) {
     return format.container === (opt.videoFormat);
   }
 
-  var stream = through();
+  var stream = opt.file ?
+    fs.createWriteStream(opt.file)
+    :
+    through();
 
   new ffmpeg({source: video})
     .toFormat(opt.audioFormat)
