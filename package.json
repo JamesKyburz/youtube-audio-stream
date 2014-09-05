@@ -12,9 +12,9 @@
   },
   "keywords": [ "audio", "youtube", "stream", "streaming" ],
   "dependencies": {
-    "through": "~2.3.4",
-    "fluent-ffmpeg": "~1.5.2",
-    "ytdl": "~0.1.19"
+    "fluent-ffmpeg": "^2.0.0-rc2",
+    "through": "^2.3.4",
+    "ytdl-core": "^0.2.4"
   },
   "devDependencies": {
     "indexhtmlify": "~1.0.2"
