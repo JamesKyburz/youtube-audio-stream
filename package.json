@@ -1,7 +1,7 @@
 {
   "name": "youtube-audio-stream",
   "description": "youtube-audio-stream",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "repository": {
     "type": "git",
     "url": "git://github.com/jameskyburz/youtube-audio-stream.git"
@@ -10,7 +10,12 @@
   "scripts": {
     "test": "cat ./test/video.js | node ./node_modules/indexhtmlify/index.js > ./test/server.html && node ./test/server.js"
   },
-  "keywords": [ "audio", "youtube", "stream", "streaming" ],
+  "keywords": [
+    "audio",
+    "youtube",
+    "stream",
+    "streaming"
+  ],
   "dependencies": {
     "fluent-ffmpeg": "^2.0.0-rc2",
     "through": "^2.3.4",
