@@ -1,4 +1,4 @@
-var ytdl     = require('ytdl');
+var ytdl     = require('ytdl-core');
 var ffmpeg   = require('fluent-ffmpeg');
 var through  = require('through');
 var defaults = require('./defaults');
