@@ -18,7 +18,7 @@
   ],
   "dependencies": {
     "fluent-ffmpeg": "^2.0.0-rc2",
-    "through": "^2.3.4",
+    "through2": "^0.6.1",
     "ytdl-core": "^0.2.4"
   },
   "devDependencies": {
