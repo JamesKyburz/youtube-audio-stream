@@ -13,7 +13,8 @@ You will need to have [ffmeg](http://www.ffmpeg.org/) and the necessary encoding
 
 ## Usage
 
-Here is an example that
+Here is an example that:
+
 1 queries for a video by video ID
 2. Retrieves the audio via this package
 3. pipes it to `res`
