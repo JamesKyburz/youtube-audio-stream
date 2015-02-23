@@ -17,11 +17,11 @@
     "streaming"
   ],
   "dependencies": {
-    "fluent-ffmpeg": "^2.0.0-rc2",
-    "through2": "^0.6.1",
-    "ytdl-core": "^0.2.4"
+    "fluent-ffmpeg": "^2.0.0-rc3",
+    "through2": "^0.6.3",
+    "ytdl-core": "^0.5.0"
   },
   "devDependencies": {
-    "indexhtmlify": "~1.0.2"
+    "indexhtmlify": "^1.2.0"
   }
 }
