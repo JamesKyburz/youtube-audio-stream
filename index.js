@@ -21,6 +21,9 @@ function streamify(uri, opt) {
     through();
 
   new ffmpeg({source: video})
+    .on('error', function() {
+      video.end();
+    })
     .toFormat(opt.audioFormat)
     .writeToStream(stream)
   ;
