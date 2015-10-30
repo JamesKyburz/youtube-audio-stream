@@ -20,19 +20,13 @@ function streamify(uri, opt) {
     :
     through();
 
-  var f = new ffmpeg({source: video})
-    .on('error', function(err) {
-      video.end();
-      if (stream.listeners('error').length > 2) {
-        stream.emit('error', err);
-      } else {
-        throw new Error(err);
-      }
-    })
-    .toFormat(opt.audioFormat)
-    .writeToStream(stream)
+  var convert = new ffmpeg(video)
+    .format(opt.audioFormat)
+    .pipe(stream)
   ;
 
-  return stream;
+  convert.on('error', video.end.bind(video));
+  convert.on('error', stream.emit.bind(stream, 'error'));
 
+  return stream;
 }
