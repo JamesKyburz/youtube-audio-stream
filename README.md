@@ -1,5 +1,7 @@
 # youtube-audio-stream
 
+[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
+
 This module streams youtube using [ytdl](https://github.com/fent/node-ytdl) to get the youtube download stream.
 
 To convert to audio the module [fluent-ffmpeg](https://github.com/schaermu/node-fluent-ffmpeg) is used.
@@ -20,17 +22,14 @@ Here is an example that:
 3. pipes it to `res`
 
 ```
-var getAudio = function(req, res) {
-
-  var requestUrl = 'http://youtube.com/watch?v=' + req.params.videoId;
-
+var getAudio = function (req, res) {
+  var requestUrl = 'http://youtube.com/watch?v=' + req.params.videoId
   try {
-    youtubeStream(requestUrl).pipe(res);
-  } catch(exception) {
-    res.status(500).send(exception);
+    youtubeStream(requestUrl).pipe(res)
+  } catch (exception) {
+    res.status(500).send(exception)
   }
-
-};
+}
 ```
 
 ## Testing

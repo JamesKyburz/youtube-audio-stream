@@ -1,7 +1,7 @@
-window.onload = function() {
-  var player = new Audio('youtube.com/watch?v=s-mOy8VUEBk')
-  player.preload = 'metadata';
-  player.play();
-  player.controls = true;
-  document.body.appendChild(player);
-};
+window.onload = function () {
+  var player = new window.Audio('youtube.com/watch?v=s-mOy8VUEBk')
+  player.preload = 'metadata'
+  player.play()
+  player.controls = true
+  document.body.appendChild(player)
+}
