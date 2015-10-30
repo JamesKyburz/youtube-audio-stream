@@ -11,6 +11,7 @@ function streamify (uri, opt) {
     videoFormat: 'mp4',
     quality: 'lowest',
     audioFormat: 'mp3',
+    applyOptions: function () {}
   }, opt)
 
   var video = ytdl(uri, {filter: filterVideo, quality: opt.quality})
@@ -23,12 +24,13 @@ function streamify (uri, opt) {
     ? fs.createWriteStream(opt.file)
     : through()
 
-  var convert = new FFmpeg(video)
+  var ffmpeg = new FFmpeg(video)
+  opt.applyOptions(ffmpeg)
+  var output = ffmpeg
     .format(opt.audioFormat)
     .pipe(stream)
 
-  convert.on('error', video.end.bind(video))
-  convert.on('error', stream.emit.bind(stream, 'error'))
-
+  output.on('error', video.end.bind(video))
+  output.on('error', stream.emit.bind(stream, 'error'))
   return stream
 }
