@@ -20,7 +20,15 @@ function streamify(uri, opt) {
     :
     through();
 
-  new ffmpeg({source: video})
+  var f = new ffmpeg({source: video})
+    .on('error', function(err) {
+      video.end();
+      if (stream.listeners('error').length > 2) {
+        stream.emit('error', err);
+      } else {
+        throw new Error(err);
+      }
+    })
     .toFormat(opt.audioFormat)
     .writeToStream(stream)
   ;
