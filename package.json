@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "indexhtmlify": "1.2.0",
-    "standard": "6.0.3"
+    "standard": "6.0.4"
   },
   "license": "MIT"
 }
