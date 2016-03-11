@@ -21,7 +21,7 @@
     "fluent-ffmpeg": "2.0.1",
     "through2": "2.0.1",
     "xtend": "4.0.1",
-    "ytdl-core": "0.7.10"
+    "ytdl-core": "0.7.12"
   },
   "devDependencies": {
     "indexhtmlify": "1.2.1",
