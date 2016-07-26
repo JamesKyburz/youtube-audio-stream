@@ -24,7 +24,7 @@
     "ytdl-core": "0.7.17"
   },
   "devDependencies": {
-    "indexhtmlify": "1.2.1",
+    "indexhtmlify": "1.3.0",
     "standard": "7.1.2"
   },
   "license": "MIT"
