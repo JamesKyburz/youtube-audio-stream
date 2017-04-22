@@ -21,7 +21,7 @@ Here is an example that:
 2. Retrieves the audio via this package
 3. pipes it to `res`
 
-```
+```js
 var getAudio = function (req, res) {
   var requestUrl = 'http://youtube.com/watch?v=' + req.params.videoId
   try {
