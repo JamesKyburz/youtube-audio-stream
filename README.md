@@ -32,6 +32,18 @@ var getAudio = function (req, res) {
 }
 ```
 
+## Node example playing directly to speaker
+```js
+const stream = require('youtube-audio-stream')
+const url = 'http://youtube.com/watch?v=34aQNMvGEZQ'
+const decoder = require('lame').Decoder
+const speaker = require('speaker')
+
+stream(url)
+.pipe(decoder())
+.pipe(speaker())
+```
+
 ## Testing
 
 This package comes with a simple example for testing. This can be run with the command `npm test`, which will then serve the example at `localhost:3000`. The example consists of an `<audio>` component whose source is retrieved via this package.
