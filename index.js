@@ -21,6 +21,7 @@ function streamify(uri, opt) {
     // Will be called when the download starts.
     video.on('response', function (info) {
       var res = opt.response;
+      console.log(info)
       if (info.statusCode === 200) {
         res.writeHead(200, {'Content-Length': info.headers["content-length"]});
         stream.pipe(res)
