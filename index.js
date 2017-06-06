@@ -28,6 +28,7 @@ function streamify(uri, opt) {
   }
 
   video.on('error', function (i) {
+    var res = opt.response;
     console.log(i);
     res.write("VIDEO ERROR");
     res.end();
