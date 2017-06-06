@@ -6,26 +6,35 @@ var fs = require('fs')
 
 module.exports = streamify
 
-function streamify (uri, opt) {
+function streamify(uri, opt) {
   opt = xtend({
     videoFormat: 'mp4',
     quality: 'lowest',
     audioFormat: 'mp3',
-    applyOptions: function () {}
+    applyOptions: function () {
+    }
   }, opt)
 
   var video = ytdl(uri, {filter: filterVideo, quality: opt.quality})
 
-  if(opt.response){
+  if (opt.response) {
     // Will be called when the download starts.
     video.on('response', function (info) {
       var res = opt.response;
       res.writeHead(200, {'Content-Length': info.headers["content-length"]});
       stream.pipe(res)
     });
+
   }
 
-  function filterVideo (format) {
+  video.on('error', function (i) {
+    console.log(i);
+    res.write("VIDEO ERROR");
+    res.end();
+  });
+
+
+  function filterVideo(format) {
     return format.container === (opt.videoFormat)
   }
 
