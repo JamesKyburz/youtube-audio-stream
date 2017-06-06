@@ -10,7 +10,7 @@ function demo (req, res) {
     return fs.createReadStream(path.join(__dirname, '/server.html')).pipe(res)
   }
   if (/youtube/.test(req.url)) {
-    stream(req.url.slice(1)).pipe(res)
+    stream(req.url.slice(1), {response: res});
   }
 }
 
