@@ -3,18 +3,27 @@ var fs = require('fs')
 var stream = require('..')
 var path = require('path')
 
-http.createServer(demo).listen(3000)
-  .on('error', function (err) {
-    console.log(err);
-  });
+var server = http.createServer(requestHandler);
 
-function demo(req, res) {
-  if (req.url === '/') {
-    return fs.createReadStream(path.join(__dirname, '/server.html')).pipe(res)
-  }
-  if (/youtube/.test(req.url)) {
-    stream(req.url.slice(1), {response: res});
+server.on('error', function (err) {
+  console.log(err);
+});
+
+function requestHandler(req, res) {
+  try {
+    if (req.url === '/') {
+      return fs.createReadStream(path.join(__dirname, '/server.html')).pipe(res)
+    }
+    if (/youtube/.test(req.url)) {
+      stream(req.url.slice(1), {response: res});
+    }
+    console.log("OK " + req.url);
+  } catch (e) {
+    console.log(e);
+    res.write("ERROR");
+    res.end();
   }
 }
 
-console.log('open http://localhost:3000 for demo of audio stream')
+server.listen(3000);
+console.log('open http://localhost:3000 for requestHandler of audio stream')
