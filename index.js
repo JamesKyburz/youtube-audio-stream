@@ -21,18 +21,21 @@ function streamify(uri, opt) {
     // Will be called when the download starts.
     video.on('response', function (info) {
       var res = opt.response;
-      res.writeHead(200, {'Content-Length': info.headers["content-length"]});
-      stream.pipe(res)
+      if (info.statusCode === 200) {
+        res.writeHead(200, {'Content-Length': info.headers["content-length"]});
+        stream.pipe(res)
+      } else {
+        res.write("VIDEO ERROR");
+        res.end();
+      }
     });
 
   }
 
-  video.on('error', function (i) {
-    var res = opt.response;
-    console.log(i);
-    res.write("VIDEO ERROR");
-    res.end();
-  });
+  /*video.on('error', function (i) {
+   var res = opt.response;
+   console.log(i);
+   });*/
 
 
   function filterVideo(format) {
