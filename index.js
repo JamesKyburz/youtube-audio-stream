@@ -6,19 +6,17 @@ var fs = require('fs')
 
 module.exports = streamify
 
-function streamify(uri, opt) {
+function streamify (uri, opt) {
   opt = xtend({
     videoFormat: 'mp4',
     quality: 'lowest',
     audioFormat: 'mp3',
-    applyOptions: function () {
-    }
+    applyOptions: function () {}
   }, opt)
 
   var video = ytdl(uri, {filter: filterVideo, quality: opt.quality})
 
-
-  function filterVideo(format) {
+  function filterVideo (format) {
     return format.container === (opt.videoFormat)
   }
 

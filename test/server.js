@@ -35,4 +35,4 @@ function requestHandler(req, res) {
 }
 
 server.listen(3000);
-console.log('open http://localhost:3000 for requestHandler of audio stream')
+console.log('open http://localhost:3000 for demo of audio stream')
