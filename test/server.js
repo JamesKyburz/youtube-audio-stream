@@ -15,7 +15,16 @@ function requestHandler(req, res) {
       return fs.createReadStream(path.join(__dirname, '/server.html')).pipe(res)
     }
     if (/youtu/.test(req.url)) {
-      stream(req.url.slice(1), {response: res});
+      var s = stream(req.url.slice(1));
+
+      // Will be called when the download starts.
+      s.video.on('response', function (info) {
+        if (info.statusCode === 200) {
+          res.writeHead(200, {'Content-Length': info.headers["content-length"]});
+        }
+      });
+
+      s.pipe(res);
     }
     console.log("OK " + req.url);
   } catch (e) {

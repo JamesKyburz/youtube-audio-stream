@@ -17,27 +17,6 @@ function streamify(uri, opt) {
 
   var video = ytdl(uri, {filter: filterVideo, quality: opt.quality})
 
-  if (opt.response) {
-    // Will be called when the download starts.
-    video.on('response', function (info) {
-      var res = opt.response;
-      console.log(info)
-      if (info.statusCode === 200) {
-        res.writeHead(200, {'Content-Length': info.headers["content-length"]});
-        stream.pipe(res)
-      } else {
-        res.write("VIDEO ERROR");
-        res.end();
-      }
-    });
-
-  }
-
-  /*video.on('error', function (i) {
-   var res = opt.response;
-   console.log(i);
-   });*/
-
 
   function filterVideo(format) {
     return format.container === (opt.videoFormat)
@@ -55,5 +34,9 @@ function streamify(uri, opt) {
 
   output.on('error', video.end.bind(video))
   output.on('error', stream.emit.bind(stream, 'error'))
-  return stream
+
+  //to let the user manage the video events for using its info like duration, description, name, etc.
+  stream.video = video;
+
+  return stream;
 }
