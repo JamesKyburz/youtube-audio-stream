@@ -14,7 +14,7 @@ function requestHandler(req, res) {
     if (req.url === '/') {
       return fs.createReadStream(path.join(__dirname, '/server.html')).pipe(res)
     }
-    if (/youtube/.test(req.url)) {
+    if (/youtu/.test(req.url)) {
       stream(req.url.slice(1), {response: res});
     }
     console.log("OK " + req.url);
