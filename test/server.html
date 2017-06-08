@@ -1,17 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>---</title>
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-<meta charset=utf-8></head>
-<body></body>
+    <title>Youtube Audio Streaming</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+    <meta charset=utf-8>
+</head>
+<body>
+
+<p>
+    Just set the video URL in the nav bar. For example:
+    <br/>
+    Coldplay - A Head Full Of Dreams:
+    <a href="/https://www.youtube.com/watch?v=vGZMvV9KBp8">
+        <i id="location">http://foo.com</i>/<b>https://www.youtube.com/watch?v=vGZMvV9KBp8</b>
+    </a>
+</p>
+
+</body>
 <script>
-window.onload = function () {
-  var player = new window.Audio('www.youtube.com/watch?v=VfI-cRvzgUU')
-  player.preload = 'metadata'
-  player.play()
-  player.controls = true
-  document.body.appendChild(player)
-}
+  document.getElementById("location").textContent = window.location.origin;
+
+  window.onload = function () {
+    var player = new window.Audio('www.youtube.com/watch?v=WXmTEyq5nXc')
+    player.preload = 'metadata'
+    player.play()
+    player.controls = true
+    document.body.appendChild(player)
+  }
 </script>
 </html>
