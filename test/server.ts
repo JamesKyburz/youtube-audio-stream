@@ -14,7 +14,7 @@ let tmp_path = path.join(__dirname, TMP_FOLDER);
 fs.readdirSync(tmp_path)
     .forEach(function(dir) {
         let location = path.join(tmp_path,dir);
-        if (fs.existsSync(location)){
+        if (fs.existsSync(location) && location.endsWith(".mp3")){
             fs.unlink(location);
         }
     });
