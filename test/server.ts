@@ -1,25 +1,29 @@
-var fs = require('fs');
-var stream = require('..');
-var path = require('path');
-var TMP_FOLDER = "tmp";
-var express = require('express');
-var app = express();
-var port = 3000;
+const fs = require('fs');
+const stream = require('..');
+const path = require('path');
+const TMP_FOLDER = "tmp";
+const express = require('express');
+const app = express();
+const port = 3000;
+
 //all the routes will be managed by the same request handler
 app.get('/*', requestHandler);
+
 //clear the temporary folder every time we launch the server
-var tmp_path = path.join(__dirname, TMP_FOLDER);
+let tmp_path = path.join(__dirname, TMP_FOLDER);
 fs.readdirSync(tmp_path)
-    .forEach(function (dir) {
-    var location = path.join(tmp_path, dir);
-    if (fs.existsSync(location)) {
-        fs.unlink(location);
-    }
-});
+    .forEach(function(dir) {
+        let location = path.join(tmp_path,dir);
+        if (fs.existsSync(location)){
+            fs.unlink(location);
+        }
+    });
+
 //launch the server
 app.listen(port, function () {
-    console.log("Youtube audio streamer listening on port " + port + "!");
+    console.log(`Youtube audio streamer listening on port ${port}!`)
 });
+
 /* ********************************************************************************************************************
  PRIVATE
  *********************************************************************************************************************/
@@ -33,45 +37,52 @@ function requestHandler(req, res) {
     try {
         //if no video requested, show the manual
         if (req.url === '/') {
-            return fs.createReadStream(path.join(__dirname, '/server.html')).pipe(res);
+            return fs.createReadStream(path.join(__dirname, '/server.html')).pipe(res)
         }
         //there is a video request, process it
         if (/youtu/.test(req.url)) {
+
             //get the youtube url to request
-            var url = req.url.slice(1);
+            let url = req.url.slice(1);
+
             //remove .mp3 ending if it has it
             if (url.endsWith('.mp3'))
                 url = url.substring(0, url.length - 4);
+
             //get a random filename to save the file
-            var fileName = path.join(TMP_FOLDER, Math.random() + ".mp3");
+            let fileName = path.join(TMP_FOLDER, Math.random() + ".mp3");
+
             //request the audio from the video and save it in a file
-            var s = stream(url, { file: fileName });
+            let s = stream(url, {file: fileName});
+
             //determine the full path of the audio
-            var fullPath_1 = path.join(__dirname, fileName);
+            let fullPath = path.join(__dirname, fileName);
+
             //watch the video downloading progress...
-            s.video.on('progress', function (chunkSize, acu, total) {
+            s.video.on('progress', (chunkSize, acu, total) => {
                 if (acu === total) {
-                    setTimeout(function () {
+                    setTimeout(() => {
                         //when the video is ready and save it in a file:
                         // - send it
                         // - remove it
-                        res.sendFile(fullPath_1, {
-                            headers: {
-                                'Content-Length': total
+                        res.sendFile(fullPath,{
+                            headers:{
+                                'Content-Length':total
                             }
-                        }, function () {
-                            fs.unlink(fullPath_1);
-                        });
-                    }, 1000); //wait a bit for file writing ends
+                        },() => {
+                            fs.unlink(fullPath);
+                        })
+                    },1000);//wait a bit for file writing ends
                 }
             });
+
+
         }
         console.log("OK " + req.url);
-    }
-    catch (e) {
+    } catch (e) {
         console.log(e);
         res.write("ERROR");
         res.end();
     }
 }
-//# sourceMappingURL=server.js.map
+
