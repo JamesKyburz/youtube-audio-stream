@@ -5,16 +5,21 @@ const TMP_FOLDER = "tmp";
 const express = require('express');
 const app = express();
 const port = 3000;
+const YOUTUBE_REG_EX = "youtu";
+//all the routes will be managed by the same request handler
+app.get('/', (req, res) => {
+    return fs.createReadStream(path.join(__dirname, '/server.html')).pipe(res);
+});
 
 //all the routes will be managed by the same request handler
-app.get('/*', requestHandler);
+app.get(`/*${YOUTUBE_REG_EX}*`, requestHandler);
 
 //clear the temporary folder every time we launch the server
 let tmp_path = path.join(__dirname, TMP_FOLDER);
 fs.readdirSync(tmp_path)
-    .forEach(function(dir) {
-        let location = path.join(tmp_path,dir);
-        if (fs.existsSync(location) && location.endsWith(".mp3")){
+    .forEach(function (dir) {
+        let location = path.join(tmp_path, dir);
+        if (fs.existsSync(location) && location.endsWith(".mp3")) {
             fs.unlink(location);
         }
     });
@@ -35,12 +40,8 @@ app.listen(port, function () {
  */
 function requestHandler(req, res) {
     try {
-        //if no video requested, show the manual
-        if (req.url === '/') {
-            return fs.createReadStream(path.join(__dirname, '/server.html')).pipe(res)
-        }
         //there is a video request, process it
-        if (/youtu/.test(req.url)) {
+        if (new RegExp(`/${YOUTUBE_REG_EX}/`).test(req.url)) {
 
             //get the youtube url to request
             let url = req.url.slice(1);
@@ -50,13 +51,12 @@ function requestHandler(req, res) {
                 url = url.substring(0, url.length - 4);
 
             //get a random filename to save the file
-            let fileName = path.join(TMP_FOLDER, Math.random() + ".mp3");
+            let fullPath = path.join(__dirname, TMP_FOLDER, Math.random() + ".mp3");
 
             //request the audio from the video and save it in a file
-            let s = stream(url, {file: fileName});
+            let s = stream(url, {file: fullPath});
 
             //determine the full path of the audio
-            let fullPath = path.join(__dirname, fileName);
 
             //watch the video downloading progress...
             s.video.on('progress', (chunkSize, acu, total) => {
@@ -65,14 +65,14 @@ function requestHandler(req, res) {
                         //when the video is ready and save it in a file:
                         // - send it
                         // - remove it
-                        res.sendFile(fullPath,{
-                            headers:{
-                                'Content-Length':total
+                        res.sendFile(fullPath, {
+                            headers: {
+                                'Content-Length': total
                             }
-                        },() => {
+                        }, () => {
                             fs.unlink(fullPath);
                         })
-                    },1000);//wait a bit for file writing ends
+                    }, 1000);//wait a bit for file writing ends
                 }
             });
 
