@@ -41,7 +41,7 @@ app.listen(port, function () {
 function requestHandler(req, res) {
     try {
         //there is a video request, process it
-        if (new RegExp(`/${YOUTUBE_REG_EX}/`).test(req.url)) {
+        if (new RegExp(`${YOUTUBE_REG_EX}`).test(req.url)) {
 
             //get the youtube url to request
             let url = req.url.slice(1);

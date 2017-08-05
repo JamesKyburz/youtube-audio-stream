@@ -5,8 +5,13 @@ var TMP_FOLDER = "tmp";
 var express = require('express');
 var app = express();
 var port = 3000;
+var YOUTUBE_REG_EX = "youtu";
 //all the routes will be managed by the same request handler
-app.get('/*', requestHandler);
+app.get('/', function (req, res) {
+    return fs.createReadStream(path.join(__dirname, '/server.html')).pipe(res);
+});
+//all the routes will be managed by the same request handler
+app.get("/*" + YOUTUBE_REG_EX + "*", requestHandler);
 //clear the temporary folder every time we launch the server
 var tmp_path = path.join(__dirname, TMP_FOLDER);
 fs.readdirSync(tmp_path)
@@ -31,23 +36,18 @@ app.listen(port, function () {
  */
 function requestHandler(req, res) {
     try {
-        //if no video requested, show the manual
-        if (req.url === '/') {
-            return fs.createReadStream(path.join(__dirname, '/server.html')).pipe(res);
-        }
         //there is a video request, process it
-        if (/youtu/.test(req.url)) {
+        if (new RegExp("" + YOUTUBE_REG_EX).test(req.url)) {
             //get the youtube url to request
             var url = req.url.slice(1);
             //remove .mp3 ending if it has it
             if (url.endsWith('.mp3'))
                 url = url.substring(0, url.length - 4);
             //get a random filename to save the file
-            var fileName = path.join(TMP_FOLDER, Math.random() + ".mp3");
+            var fullPath_1 = path.join(__dirname, TMP_FOLDER, Math.random() + ".mp3");
             //request the audio from the video and save it in a file
-            var s = stream(url, { file: fileName });
+            var s = stream(url, { file: fullPath_1 });
             //determine the full path of the audio
-            var fullPath_1 = path.join(__dirname, fileName);
             //watch the video downloading progress...
             s.video.on('progress', function (chunkSize, acu, total) {
                 if (acu === total) {
