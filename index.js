@@ -11,10 +11,11 @@ function streamify (uri, opt) {
     videoFormat: 'mp4',
     quality: 'lowest',
     audioFormat: 'mp3',
+    filter: filterVideo,
     applyOptions: function () {}
   }, opt)
 
-  var video = ytdl(uri, {filter: filterVideo, quality: opt.quality})
+  var video = ytdl(uri, opt)
 
   function filterVideo (format) {
     return (
