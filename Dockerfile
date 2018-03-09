@@ -1,4 +1,4 @@
-FROM node:8.2.1-alpine
+FROM node:8.10.0-alpine
 RUN apk update && apk add ffmpeg && rm -rf /var/cache/apk/*
 
 RUN mkdir /app
