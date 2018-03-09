@@ -48,3 +48,18 @@ stream(url)
 ## Testing
 
 This package comes with a simple example for testing. This can be run with the command `npm test`, which will then serve the example at `localhost:3000`. The example consists of an `<audio>` component whose source is retrieved via this package.
+
+### Testing inside a docker container
+
+You can test this module without the need o have [ffmeg](http://www.ffmpeg.org/) locally installed
+doing it inside a container.
+
+To build the Docker image:
+```
+docker build . -t youtube-audio-stream-test
+```
+
+To run the test:
+```
+docker run --rm -it -p 3000:3000 youtube-audio-stream-test
+```

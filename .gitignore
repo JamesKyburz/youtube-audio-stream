@@ -1,3 +1,4 @@
 node_modules
 test/server.html
 npm-debug.log
+.idea
