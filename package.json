@@ -7,6 +7,7 @@
     "url": "git://github.com/jameskyburz/youtube-audio-stream.git"
   },
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "cat ./test/video.js | node ./node_modules/indexhtmlify/index.js > ./test/server.html && node ./test/server.js",
     "prepublish": "standard"
@@ -24,6 +25,7 @@
     "ytdl-core": "0.20.2"
   },
   "devDependencies": {
+    "@types/node": "^10.11.4",
     "indexhtmlify": "1.3.1",
     "standard": "10.0.2"
   },
