@@ -7,7 +7,7 @@ This module streams youtube using [ytdl](https://github.com/fent/node-ytdl) to g
 
 To convert to audio the module [fluent-ffmpeg](https://github.com/schaermu/node-fluent-ffmpeg) is used.
 
-You will need to have [ffmeg](http://www.ffmpeg.org/) and the necessary encoding libraries installed, as well as in your PATH. If you're on OSX, this can be handled easily using [Homebrew](http://brew.sh/) (`brew install ffmpeg`).
+You will need to have [ffmpeg](http://www.ffmpeg.org/) and the necessary encoding libraries installed, as well as in your PATH. If you're on OSX, this can be handled easily using [Homebrew](http://brew.sh/) (`brew install ffmpeg`).
 
 ## Getting Started
 
