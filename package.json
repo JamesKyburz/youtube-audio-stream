@@ -24,7 +24,7 @@
     "ytdl-core": "0.28.3"
   },
   "devDependencies": {
-    "@types/node": "^10.11.4"
+    "@types/node": "10.12.18"
   },
   "license": "MIT"
 }
