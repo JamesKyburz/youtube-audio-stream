@@ -9,7 +9,7 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "test": "cat ./test/video.js | node ./node_modules/indexhtmlify/index.js > ./test/server.html && node ./test/server.js",
+    "test": "cat ./test/video.js | npx indexhtmlify > ./test/server.html && node ./test/server.js",
     "prepublish": "npx standard"
   },
   "keywords": [
@@ -20,12 +20,11 @@
   ],
   "dependencies": {
     "fluent-ffmpeg": "2.1.2",
-    "through2": "2.0.3",
+    "ytdl": "0.11.0",
     "ytdl-core": "0.28.3"
   },
   "devDependencies": {
-    "@types/node": "^10.11.4",
-    "indexhtmlify": "1.3.1"
+    "@types/node": "^10.11.4"
   },
   "license": "MIT"
 }
