@@ -8,6 +8,10 @@
   },
   "main": "index.js",
   "types": "index.d.ts",
+  "bin": "index.js",
+  "files": [
+    "index.js"
+  ],
   "scripts": {
     "test": "cat ./test/video.js | npx indexhtmlify > ./test/server.html && node ./test/server.js",
     "prepublish": "npx standard"
