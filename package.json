@@ -22,7 +22,7 @@
     "fluent-ffmpeg": "2.1.2",
     "through2": "2.0.3",
     "xtend": "4.0.1",
-    "ytdl-core": "0.20.2"
+    "ytdl-core": "0.28.3"
   },
   "devDependencies": {
     "@types/node": "^10.11.4",
