@@ -14,7 +14,7 @@ function streamify (uri, opt) {
     filter (format) {
       return format.container === opt.videoFormat && format.audioEncoding
     },
-    applyOptions: function () {}
+    applyOptions () {}
   }
 
   const video = ytdl(uri, opt)
