@@ -1,7 +1,7 @@
-var ytdl = require('ytdl-core')
-var FFmpeg = require('fluent-ffmpeg')
-var through = require('through2')
-var fs = require('fs')
+const ytdl = require('ytdl-core')
+const FFmpeg = require('fluent-ffmpeg')
+const { PassThrough } = require('stream')
+const fs = require('fs')
 
 module.exports = streamify
 
@@ -17,13 +17,13 @@ function streamify (uri, opt) {
     applyOptions: function () {}
   }
 
-  var video = ytdl(uri, opt)
+  const video = ytdl(uri, opt)
 
-  var stream = opt.file ? fs.createWriteStream(opt.file) : through()
+  const stream = opt.file ? fs.createWriteStream(opt.file) : new PassThrough()
 
-  var ffmpeg = new FFmpeg(video)
+  const ffmpeg = new FFmpeg(video)
   opt.applyOptions(ffmpeg)
-  var output = ffmpeg.format(opt.audioFormat).pipe(stream)
+  const output = ffmpeg.format(opt.audioFormat).pipe(stream)
 
   video.on('info', stream.emit.bind(stream, 'info'))
   ffmpeg.on('error', stream.emit.bind(stream, 'error'))
