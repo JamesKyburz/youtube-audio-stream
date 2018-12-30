@@ -12,12 +12,11 @@ declare module 'youtube-audio-stream' {
         readonly file?: PathLike;
         readonly videoFormat?: string;
         readonly audioFormat?: string;
-        readonly applyOptions?: (input: Ffmpeg.FfmpegCommand) => void;
     }
 
     /**
      * Fetches the audio from the YouTube video.
-     * 
+     *
      * @param uri YouTube video link.
      * @param opt Options to send to process the audio in the video.
      * @returns A audio stream.
