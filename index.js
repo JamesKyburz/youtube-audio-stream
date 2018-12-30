@@ -20,22 +20,26 @@ function streamify (uri, opt) {
     audioFormat: 'mp3',
     filter (format) {
       return format.container === opt.videoFormat && format.audioEncoding
-    },
-    applyOptions () {}
+    }
   }
 
   const video = ytdl(uri, opt)
-
-  const stream = opt.file ? fs.createWriteStream(opt.file) : new PassThrough()
-
+  const { file, audioFormat } = opt
+  const stream = file ? fs.createWriteStream(file) : new PassThrough()
   const ffmpeg = new FFmpeg(video)
-  opt.applyOptions(ffmpeg)
 
-  const output = ffmpeg.format(opt.audioFormat).pipe(stream)
+  process.nextTick(() => {
+    const output = ffmpeg.format(audioFormat).pipe(stream)
 
-  video.on('info', stream.emit.bind(stream, 'info'))
-  ffmpeg.on('error', stream.emit.bind(stream, 'error'))
-  output.on('error', video.end.bind(video))
-  output.on('error', stream.emit.bind(stream, 'error'))
+    ffmpeg.on('error', error => stream.emit('error', error))
+    output.on('error', error => {
+      video.end()
+      stream.emit('error', error)
+    })
+  })
+
+  stream.video = video
+  stream.ffmpeg = ffmpeg
+
   return stream
 }
