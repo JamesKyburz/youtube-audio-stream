@@ -19,7 +19,7 @@ function streamify (uri, opt) {
     quality: 'lowest',
     audioFormat: 'mp3',
     filter (format) {
-      return format.container === opt.videoFormat && format.audioEncoding
+      return format.container === opt.videoFormat && format.audioBitrate
     }
   }
 
