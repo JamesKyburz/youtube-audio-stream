@@ -24,7 +24,7 @@
   ],
   "dependencies": {
     "fluent-ffmpeg": "2.1.2",
-    "ytdl-core": "1.0.0"
+    "ytdl-core": "1.0.5"
   },
   "devDependencies": {
     "@types/node": "13.1.2"
