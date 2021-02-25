@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "test": "cat ./test/video.js | npx indexhtmlify > ./test/server.html && node ./test/server.js",
-    "prepublish": "npx standard"
+    "prepublishOnly": "npx standard"
   },
   "keywords": [
     "audio",
@@ -24,10 +24,10 @@
   ],
   "dependencies": {
     "fluent-ffmpeg": "2.1.2",
-    "ytdl-core": "2.1.7"
+    "ytdl-core": "4.5.0"
   },
   "devDependencies": {
-    "@types/node": "14.0.13"
+    "@types/node": "14.14.31"
   },
   "license": "MIT"
 }
