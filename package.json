@@ -14,7 +14,8 @@
   ],
   "scripts": {
     "test": "cat ./test/video.js | npx indexhtmlify > ./test/server.html && node ./test/server.js",
-    "prepublishOnly": "npx standard"
+    "prepublishOnly": "npx standard",
+    "version": "npx standard"
   },
   "keywords": [
     "audio",
