@@ -1,14 +1,16 @@
 {
   "name": "youtube-audio-stream",
   "description": "youtube-audio-stream",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "repository": {
     "type": "git",
     "url": "git://github.com/jameskyburz/youtube-audio-stream.git"
   },
   "main": "index.js",
   "types": "index.d.ts",
-  "bin": "index.js",
+  "bin": {
+    "youtube-audio-stream": "index.js"
+  },
   "files": [
     "index.js"
   ],
