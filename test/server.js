@@ -1,7 +1,7 @@
-var http = require('http')
-var fs = require('fs')
-var stream = require('..')
-var path = require('path')
+const http = require('http')
+const fs = require('fs')
+const stream = require('..')
+const path = require('path')
 
 http.createServer(demo).listen(3000)
 
