@@ -12,7 +12,8 @@
     "youtube-audio-stream": "index.js"
   },
   "files": [
-    "index.js"
+    "index.js",
+    "index.d.ts"
   ],
   "scripts": {
     "test": "cat ./test/video.js | npx indexhtmlify > ./test/server.html && node ./test/server.js",
