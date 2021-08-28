@@ -1,0 +1,34 @@
+name: pr
+
+concurrency:
+  group: pr
+  cancel-in-progress: false
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+      - uses: FedericoCarboni/setup-ffmpeg@v1
+      - name: run tests
+        run: |
+          npm i
+          npm run test:ci
+  automerge:
+    runs-on: ubuntu-latest
+    needs: [test]
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    steps:
+      - uses: fastify/github-action-merge-dependabot@v2.4.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}

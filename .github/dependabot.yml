@@ -1,0 +1,34 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: daily
+    open-pull-requests-limit: 20
+    labels:
+      - dependencies
+      - squash and merge
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: daily
+    open-pull-requests-limit: 20
+    labels:
+      - dependencies
+      - squash and merge
+  - package-ecosystem: npm
+    directory: "."
+    schedule:
+      interval: daily
+    open-pull-requests-limit: 20
+    labels:
+      - dependencies
+      - squash and merge
+  - package-ecosystem: docker
+    directory: "."
+    schedule:
+      interval: daily
+    open-pull-requests-limit: 20
+    labels:
+      - dependencies
+      - squash and merge

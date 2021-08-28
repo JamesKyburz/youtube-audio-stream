@@ -16,7 +16,8 @@
     "index.d.ts"
   ],
   "scripts": {
-    "test": "cat ./test/video.js | npx indexhtmlify > ./test/server.html && node ./test/server.js",
+    "test": "node --unhandled-rejections=strict ./test/server.js",
+    "test:ci": "node --unhandled-rejections=strict ./test/ci.js",
     "prepublishOnly": "npx standard",
     "version": "npx standard"
   },

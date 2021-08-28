@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+
+'use strict'
+
 const ytdl = require('ytdl-core')
 const FFmpeg = require('fluent-ffmpeg')
 const { PassThrough } = require('stream')
@@ -31,8 +34,8 @@ function streamify (uri, opt) {
   process.nextTick(() => {
     const output = ffmpeg.format(audioFormat).pipe(stream)
 
-    ffmpeg.on('error', error => stream.emit('error', error))
-    output.on('error', error => {
+    ffmpeg.once('error', error => stream.emit('error', error))
+    output.once('error', error => {
       video.end()
       stream.emit('error', error)
     })

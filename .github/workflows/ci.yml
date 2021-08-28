@@ -1,0 +1,49 @@
+name: ci
+
+concurrency:
+  group: ci
+  cancel-in-progress: false
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+      - uses: FedericoCarboni/setup-ffmpeg@v1
+      - name: run tests
+        run: |
+          npm i
+          npm run test:ci
+  publish:
+    runs-on: ubuntu-latest
+    needs: [test]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+          registry-url: 'https://registry.npmjs.org'
+      - name: install
+        run: |
+          npm i
+      - name: publish
+        env:
+          NODE_AUTH_TOKEN: "${{ secrets.NPM_TOKEN }}"
+        run: |
+          git config user.name 'Github Actions'
+          git config user.email '<>'
+          npm version patch
+          npm publish
+          git push --tags
