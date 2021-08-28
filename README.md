@@ -1,18 +1,20 @@
 # youtube-audio-stream
 
 [![js-standard-style](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://github.com/feross/standard)
-[![Greenkeeper badge](https://badges.greenkeeper.io/JamesKyburz/youtube-audio-stream.svg)](https://greenkeeper.io/)
+[![ci](https://github.com/JamesKyburz/youtube-audio-stream/actions/workflows/ci.yml/badge.svg)](https://github.com/JamesKyburz/youtube-audio-stream/actions/workflows/ci.yml)
 
 This module streams youtube using [ytdl](https://github.com/fent/node-ytdl) to get the youtube download stream.
 
 To convert to audio the module [fluent-ffmpeg](https://github.com/schaermu/node-fluent-ffmpeg) is used.
 
-You will need to have [ffmpeg](http://www.ffmpeg.org/) and the necessary encoding libraries installed, as well as in your PATH. If you're on OSX, this can be handled easily using [Homebrew](http://brew.sh/) (`brew install ffmpeg`).
+You will need to have [ffmpeg](http://www.ffmpeg.org/) and the necessary encoding libraries installed, as well as in your PATH.
+
+If you're on OSX, this can be handled easily using [Homebrew](http://brew.sh/) with `brew install ffmpeg`.
 
 ## Getting Started
 
 1. With [npm](http://npmjs.org), run `npm install youtube-audio-stream`
-2. `var youtubeStream = require('youtube-audio-stream')`
+2. `const stream = require('youtube-audio-stream')`
 
 ## Usage
 
@@ -20,15 +22,22 @@ Here is an example that:
 
 1. queries for a video by video ID
 2. Retrieves the audio via this package
-3. pipes it to `res`
+3. write it to `res`
 
 ```js
-var getAudio = function (req, res) {
-  var requestUrl = 'http://youtube.com/watch?v=' + req.params.videoId
+const stream = require('youtube-audio-stream')
+async function handleView (req, res) {
   try {
-    youtubeStream(requestUrl).pipe(res)
-  } catch (exception) {
-    res.status(500).send(exception)
+    for await (const chunk of stream(`http://youtube.com/watch?v=${req.params.videoId}`)) {
+      res.write(chunk)
+    }
+    res.end()
+  } catch (err) {
+    console.error(err)
+    if (!res.headersSent) {
+      res.writeHead(500)
+      res.end('internal system error')
+    }
   }
 }
 ```
