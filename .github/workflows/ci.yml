@@ -46,4 +46,5 @@ jobs:
           git config user.email '<>'
           npm version patch
           npm publish
+          git push
           git push --tags
