@@ -1,7 +1,7 @@
 {
   "name": "youtube-audio-stream",
   "description": "youtube-audio-stream",
-  "version": "0.3.34",
+  "version": "0.3.35",
   "repository": {
     "type": "git",
     "url": "git://github.com/jameskyburz/youtube-audio-stream.git"
