@@ -12,9 +12,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-      contents: write
     steps:
       - uses: actions/checkout@v2
         with:
@@ -29,6 +26,9 @@ jobs:
           npm run test:ci
   automerge:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: write
     needs: [test]
     if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
