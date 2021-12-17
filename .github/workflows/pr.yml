@@ -29,9 +29,21 @@ jobs:
     permissions:
       pull-requests: write
       contents: write
+      actions: write
     needs: [test]
     if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
       - uses: fastify/github-action-merge-dependabot@v3.0.2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/github-script@v5
+        name: trigger ci
+        with:
+          script: |
+            const { owner, repo } = context.repo
+            await github.rest.actions.createWorkflowDispatch({
+              owner,
+              repo,
+              workflow_id: 'ci.yml',
+              ref: 'main'
+            })
