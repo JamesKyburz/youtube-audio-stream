@@ -32,7 +32,7 @@
     "ytdl-core": "4.10.1"
   },
   "devDependencies": {
-    "@types/node": "17.0.15"
+    "@types/node": "17.0.16"
   },
   "license": "MIT"
 }
