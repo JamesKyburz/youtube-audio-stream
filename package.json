@@ -16,7 +16,7 @@
     "index.d.ts"
   ],
   "scripts": {
-    "test": "node --unhandled-rejections=strict ./test/server.js",
+    "test": "nodemon --unhandled-rejections=strict ./test/server.js",
     "test:ci": "node --unhandled-rejections=strict ./test/ci.js",
     "prepublishOnly": "npx standard",
     "version": "npx standard"
@@ -28,6 +28,7 @@
     "streaming"
   ],
   "dependencies": {
+    "ffmpeg-stream": "0.7.0",
     "fluent-ffmpeg": "2.1.2",
     "ytdl-core": "4.11.0"
   },
