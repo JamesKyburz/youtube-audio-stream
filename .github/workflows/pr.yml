@@ -29,6 +29,6 @@ jobs:
     needs: [test]
     if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
-      - uses: fastify/github-action-merge-dependabot@v3.1.7
+      - uses: fastify/github-action-merge-dependabot@v3.2.3
         with:
           github-token: ${{ secrets.DEPENDABOT_PAT }}
