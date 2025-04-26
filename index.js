@@ -2,7 +2,7 @@
 
 'use strict'
 
-const ytdl = require('ytdl-core')
+const ytdl = require('@distube/ytdl-core')
 const FFmpeg = require('fluent-ffmpeg')
 const { PassThrough } = require('stream')
 const fs = require('fs')
